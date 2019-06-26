@@ -53,7 +53,7 @@ variable "fw_bundle" {
 variable "username" {}
 variable "password" {}
 
-variable "location" {}
+variable "azure_region" {}
 
 variable "fw1_name" {}
 variable "fw2_name" {}

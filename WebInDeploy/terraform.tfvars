@@ -1,7 +1,7 @@
 
 
 #Shared variables
-location              = "west europe"
+azure_region              = "west europe"
 
 #Virtual Machine variables
 fw1_name              = "VM-FW1"
