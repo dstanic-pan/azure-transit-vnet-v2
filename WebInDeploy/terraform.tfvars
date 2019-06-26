@@ -41,7 +41,7 @@ sgrule1_name          = "allow-all-inbound"
 sgrule2_name          = "allow-all-outbound"
 
 # Network Interfaces variables
-//egresslb_ip           = "10.0.3.100"
+egresslb_ip           = "10.0.3.100"
 fw1nic0_name          = "fw1-mgmt-nic"
 fw1nic1_name          = "fw1-untrust-nic"
 fw1nic2_name          = "fw1-trust-nic"
