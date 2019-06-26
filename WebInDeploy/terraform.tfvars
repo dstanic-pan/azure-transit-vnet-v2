@@ -8,8 +8,8 @@ fw1_name              = "VM-FW1"
 fw2_name              = "VM-FW2"
 fw_size               = "Standard_DS3_v2"
 panos_version         = "latest"
-//adminuser             = "paloalto"
-//adminuserpassword     = "PanPassword123!"
+username              = "paloalto"
+password              = "PanPassword123!"
 
 # HUB-VNET variables
 //vnet_name             = "transit-vnet"
