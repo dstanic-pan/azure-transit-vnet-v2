@@ -180,3 +180,58 @@ if __name__ == '__main__':
     azure_region = args.azure_region
 
     main(username, password, resource_group, azure_region)
+
+def create_azure_fileshare(share_prefix, account_name, account_key):
+    """
+    Generate a unique share name to avoid overlaps in shared infra
+    :param share_prefix:
+    :param account_name:
+    :param account_key:
+    :return:
+    """
+
+    # FIXME - Need to remove hardcoded directoty link below
+
+    d_dir = './WebInDeploy/bootstrap'
+    share_name = "{0}-{1}".format(share_prefix.lower(), str(uuid.uuid4()))
+    print('using share_name of: {}'.format(share_name))
+
+    # archive_file_path = _create_archive_directory(files, share_prefix)
+
+    try:
+        # ignore SSL warnings - bad form, but SSL Decrypt causes issues with this
+        s = requests.Session()
+        s.verify = False
+
+        file_service = FileService(account_name=account_name, account_key=account_key, request_session=s)
+
+        # print(file_service)
+        if not file_service.exists(share_name):
+            file_service.create_share(share_name)
+
+        for d in ['config', 'content', 'software', 'license']:
+            print('creating directory of type: {}'.format(d))
+            if not file_service.exists(share_name, directory_name=d):
+                file_service.create_directory(share_name, d)
+
+            # FIXME - We only handle bootstrap files.  May need to handle other dirs
+
+            if d == 'config':
+                for filename in os.listdir(d_dir):
+                    print('creating file: {0}'.format(filename))
+                    file_service.create_file_from_path(share_name, d, filename, os.path.join(d_dir, filename))
+
+    except AttributeError as ae:
+        # this can be returned on bad auth information
+        print(ae)
+        return "Authentication or other error creating bootstrap file_share in Azure"
+
+    except AzureException as ahe:
+        print(ahe)
+        return str(ahe)
+    except ValueError as ve:
+        print(ve)
+        return str(ve)
+
+    print('all done')
+    return share_name
