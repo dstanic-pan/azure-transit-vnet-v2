@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group}"
-  location = "${var.location}"
+  location = "${var.azure_region}"
 }
 
 ################################################################################
@@ -333,7 +333,7 @@ resource "azurerm_lb_rule" "publiclbrule2" {
 
 resource "azurerm_public_ip" "fw1nic0pip" {
   name                         = "${var.fw1nic0pip_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -349,7 +349,7 @@ resource "azurerm_public_ip" "fw1nic1pip" {
 
 resource "azurerm_network_interface" "fw1nic0" {
   name                      = "${var.fw1nic0_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
 

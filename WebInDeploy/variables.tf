@@ -1,14 +1,14 @@
 variable "BootstrapStorageAccount" {
   description = "Enter your Azure Storage Account:"
-  default     = "<Bootstrap Storage Account>"
+  default     = "cloudstorageazure"
 }
 variable "StorageAccountAccessKey" {
   description = "Paste your Azure Storage Account Access Key:"
-  default     = "<Storage Account Access Key>"
+  default     = "2bowzrRAQnU+WuqdUcQ3A/3jpYip0Jns+CNtt9BsxTQu8Q3qv4FjXm6KDtr7LkogGfoXnwpekSWoa4QAzbJtHw=="
 }
 variable "StorageAccountFileShare" {
   description = "Enter your Storage Acccount File Share name:"
-  default     = "<Storage Account Fileshare Name>"
+  default     = "bootstrap"
 }
 variable "StorageAccountFileShareDirectory" {
   description = "Enter your Storage Account File Share Directory (if bootstrapping multiple firewalls):"
@@ -50,10 +50,10 @@ variable "fw_bundle" {
   description = "Enter the firewall license type (byol, bundle1, or bundle2):"
   default     = "bundle2"
 }
-variable "username" {}
-variable "password" {}
+variable "adminuser" {}
+variable "adminuserpassword" {}
 
-variable "azure_region" {}
+variable "location" {}
 
 variable "fw1_name" {}
 variable "fw2_name" {}
