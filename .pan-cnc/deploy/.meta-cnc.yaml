@@ -27,7 +27,7 @@ variables:
     type_hint: text
   - name: password
     description: FW Password
-    default:
+    default: Pan
     type_hint: password
   - name: resource_group
     description: Azure Resource Group
@@ -98,10 +98,10 @@ variables:
        value: "francecentral"
      - key: "France South"
        value: "francesouth"
-  - name: vnet_cidr
-    description: HUB VNET Space (i.e. transit-vnet 10.0.0.0/16)
-    default: 10.0.0.0/16
-    type_hint: cidr
+  #- name: vnet_cidr
+  #  description: HUB VNET Space (i.e. transit-vnet 10.0.0.0/16)
+  #  default: 10.0.0.0/16
+  #  type_hint: cidr
   #- name: subnet0_cidr
   #  description: FW-Management Subnet Space (i.e. 10.0.0.0/24)
   #  default: 10.0.0.0/24
