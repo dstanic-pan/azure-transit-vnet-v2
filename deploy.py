@@ -46,8 +46,8 @@ from collections import OrderedDict
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-_archive_dir = './WebInDeploy/bootstrap'
-_content_update_dir = './WebInDeploy/content_updates/'
+_archive_dir = './Deploy/bootstrap'
+_content_update_dir = './Deploy/content_updates/'
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -429,22 +429,6 @@ def main(username, password, rg_name, azure_region):
     logger.info("waiting for commit")
     time.sleep(60)
     logger.info("waiting for commit")
-
-    #
-    # Check Jenkins
-    #
-
-    logger.info('Checking if Jenkins Server is ready')
-
-    res = getServerStatus(albDns)
-
-    if res == 'server_up':
-        logger.info('Jenkins Server is ready')
-        logger.info('\n\n   ### Deployment Complete ###')
-        logger.info('\n\n   Connect to Jenkins Server at http://{}'.format(albDns))
-    else:
-        logger.info('Jenkins Server is down')
-        logger.info('\n\n   ### Deployment Complete ###')
 
     # dump out status to stdout
     print(json.dumps(status_output))
