@@ -319,7 +319,7 @@ def main(username, password, rg_name, azure_region):
     return_code, outputs = apply_tf('./WebInBootstrap',WebInBootstrap_vars, 'WebInBootstrap')
 
     if return_code == 0:
-        share_prefix = 'jenkins-demo'
+        share_prefix = 'azure-demo'
         resource_group = outputs['Resource_Group']['value']
         bootstrap_bucket = outputs['Bootstrap_Bucket']['value']
         storage_account_access_key = outputs['Storage_Account_Access_Key']['value']
