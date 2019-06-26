@@ -39,7 +39,7 @@ from azure.common import AzureException
 from azure.storage.file import FileService
 
 
-from pandevice import firewall
+#from pandevice import firewall
 from python_terraform import Terraform
 from collections import OrderedDict
 
