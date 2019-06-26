@@ -98,50 +98,50 @@ variables:
        value: "francecentral"
      - key: "France South"
        value: "francesouth"
-  - name: vnet_cidr
-    description: HUB VNET Space (i.e. transit-vnet 10.0.0.0/16)
-    default: 10.0.0.0/16
-    type_hint: cidr
-  - name: subnet0_cidr
-    description: FW-Management Subnet Space (i.e. 10.0.0.0/24)
-    default: 10.0.0.0/24
-    type_hint: cidr
-  - name: subnet1_cidr
-    description: UnTrust Subnet Space (i.e. 10.0.1.0/24)
-    default: 10.0.1.0/24
-    type_hint: cidr
-  - name: subnet2_cidr
-    description: Trust Subnet Space (i.e. 10.0.2.0/24)
-    default: 10.0.2.0/24
-    type_hint: cidr
-  - name: subnet3_cidr
-    description: LB-Subnet Space (i.e. 10.0.3.0/24)
-    default: 10.0.3.0/24
-    type_hint: cidr
-  - name: spoke1-vnet_cidr
-    description: Spoke1 VNET Space (i.e. transit-vnet 10.1.0.0/16)
-    default: 10.1.0.0/16
-    type_hint: cidr
-  - name: subnet10_cidr
-    description: Web Subnet Space (i.e. 10.1.0.0/24)
-    default: 10.1.0.0/24
-    type_hint: cidr
-  - name: subnet11_cidr
-    description: App Subnet Space (i.e. 10.0.1.0/24)
-    default: 10.1.1.0/24
-    type_hint: cidr
-  - name: subnet12_cidr
-    description: DB Subnet Space (i.e. 10.0.2.0/24)
-    default: 10.1.2.0/24
-    type_hint: cidr
-  - name: subnet13_cidr
-    description: Dev Subnet Space (i.e. 10.0.3.0/24)
-    default: 10.1.3.0/24
-    type_hint: cidr
-  - name: egresslb_ip
-    description: Internal Egress LB FrontEnd IP (IP must be part of LB-Subnet space i.e. 10.0.3.100)
-    default: 10.0.3.100
-    type_hint: text
+  #- name: vnet_cidr
+  #  description: HUB VNET Space (i.e. transit-vnet 10.0.0.0/16)
+  #  default: 10.0.0.0/16
+  #  type_hint: cidr
+  #- name: subnet0_cidr
+  #  description: FW-Management Subnet Space (i.e. 10.0.0.0/24)
+  #  default: 10.0.0.0/24
+  #  type_hint: cidr
+  #- name: subnet1_cidr
+  #  description: UnTrust Subnet Space (i.e. 10.0.1.0/24)
+  #  default: 10.0.1.0/24
+  #  type_hint: cidr
+  #- name: subnet2_cidr
+  #  description: Trust Subnet Space (i.e. 10.0.2.0/24)
+  #  default: 10.0.2.0/24
+  #  type_hint: cidr
+  #- name: subnet3_cidr
+  #  description: LB-Subnet Space (i.e. 10.0.3.0/24)
+  #  default: 10.0.3.0/24
+  #  type_hint: cidr
+  #- name: spoke1-vnet_cidr
+  #  description: Spoke1 VNET Space (i.e. transit-vnet 10.1.0.0/16)
+  #  default: 10.1.0.0/16
+  #  type_hint: cidr
+  #- name: subnet10_cidr
+  #  description: Web Subnet Space (i.e. 10.1.0.0/24)
+  #  default: 10.1.0.0/24
+  #  type_hint: cidr
+  #- name: subnet11_cidr
+  #  description: App Subnet Space (i.e. 10.0.1.0/24)
+  #  default: 10.1.1.0/24
+  #  type_hint: cidr
+  #- name: subnet12_cidr
+  #  description: DB Subnet Space (i.e. 10.0.2.0/24)
+  #  default: 10.1.2.0/24
+  #  type_hint: cidr
+  #- name: subnet13_cidr
+  #  description: Dev Subnet Space (i.e. 10.0.3.0/24)
+  #  default: 10.1.3.0/24
+  #  type_hint: cidr
+  #- name: egresslb_ip
+  #  description: Internal Egress LB FrontEnd IP (IP must be part of LB-Subnet space i.e. 10.0.3.100)
+  #  default: 10.0.3.100
+  #  type_hint: text
  # - name: azure_region
  #   description: Azure Region
  #   default: centralus
