@@ -46,8 +46,8 @@ from collections import OrderedDict
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-_archive_dir = './Deploy/bootstrap'
-_content_update_dir = './Deploy/content_updates/'
+_archive_dir = './WebInDeploy/bootstrap'
+_content_update_dir = './WebInDeploy/content_updates/'
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
