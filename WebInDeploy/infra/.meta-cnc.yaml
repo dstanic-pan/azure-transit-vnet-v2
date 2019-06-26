@@ -1,37 +1,47 @@
-name: azure_transit_vnet_v2
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: Azure-Tansit-VNET
 # label used for menu selection
-label: Azure Transit VNET V2
-
+label: Azure Transit VNET Framework. Step 1 - Infrastructure Deployment & Step 6 - Infrastructure Destroy
 description: >
-  This skillet deploys the Security Framework Azure Jenkins Exploit Protection environment.  The template deploy the Following:
-  Azure VNETS's, Route Tables, Subnets, Availability Zones, Load Balancers and Native Security tools WAF and Network Security Groups.
-  The Template will also deploy Palo Alto Networks Firewall with security posture.
-# type of skillet (panos or panorama or template or terraform)
-type: python3
-
-# more complex skillets may express a dependency on another skillet that should be loaded before this one.
-# For example, a set of skillets may build off of a single 'golden config' that contains shared configuration
-# As this skillet is very simple, there is no need to build on another one.
+              Step 1 - This skillet deploys Azure Hub and Spoke architecture that consist of VM-Series Azure Load Balancing Sandwich deployment in Hub VNET and one Spoke VNET's with test instances.
+              The template deploys the Following:
+              Azure VNET's, Route Tables, Subnet's, Availability Zones, Load Balancers and VNET Peering.
+              The Template will also deploy Palo Alto Networks Firewalls.
+              Step 6 - Uses Terraform Destroy process to delete the deployment by removing Firewalls and all Azure components (VNET's, Instances, LB's, Resource Group, etc.).
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: terraform
+# preload static or default-based templates
 extends:
 
-# Labels allow grouping and type specific options and are generally only used in advanced cases
+# grouping of like snippets for dynamic menu creation in panhandler
 labels:
-  collection: azure_transit_vnet_dev
+  collection:
+    - Azure-Tansit-VNET
 
-# variables define the things an operator may customize in this skillet. Things like DNS servers, NTP addresses, etc
-# may be customized for each deployment. Each variable will be rendered as a form field in the panhandler application
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
 variables:
-  - name: username
-    description: FW Username
+  - name: adminuser
+    description: FW, Web, Dev Username
     default: panadmin
     type_hint: text
-  - name: password
-    description: FW Password
-    default:
+  - name: adminuserpassword
+    description: FW, Web, Dev Password
+    default: PanPassword123!
     type_hint: password
   - name: resource_group
     description: Azure Resource Group
-    default: cloud-security-framework-changeme
+    default: transit-vnet-demo-changeme
     type_hint: text
   - name: location
     description: Azure Region
@@ -142,16 +152,22 @@ variables:
     description: Internal Egress LB FrontEnd IP (IP must be part of LB-Subnet space i.e. 10.0.3.100)
     default: 10.0.3.100
     type_hint: text
- # - name: azure_region
- #   description: Azure Region
- #   default: centralus
- #   type_hint: text
-    
-    
-# Snippets is an ordered list of configuration xml fragments that will be pushed to the PAN-OS NGFW. The xpath
-# determines where in the configuration hierarchy the xml fragment will be set. 'file' indicates the name of the file
-# to load and parse. Jinja2 style variables will be variable interpolated using the values of the 'variables' defined
-# in the 'variables' section.
-snippets:
-  - name: script
-    file: ../../deploy.py
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+#snippets:
+  #- name: edl
+  # xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list
+  #  file: edl.xml
+  #- name: tag
+  #  xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/tag
+  #  file: tag.xml
+  #- name: security_rules
+  #  xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
+  #  file: in_security_rules.xml
+# ---------------------------------------------------------------------
+# end of snippets section

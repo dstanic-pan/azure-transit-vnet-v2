@@ -303,7 +303,18 @@ def main(username, password, rg_name, azure_region):
     WebInDeploy_vars = {
         'Admin_Username': username,
         'Admin_Password': password,
-        'Azure_Region': azure_region
+        'Azure_Region': location,
+        'vnet_cidr': vnet_cidr,
+        'subnet0_cidr': subnet0_cidr,
+        'subnet1_cidr': subnet1_cidr,
+        'subnet2_cidr': subnet2_cidr,
+        'subnet3_cidr': subnet3_cidr,
+        'spoke1-vnet_cidr': spoke1-vnet_cidr,
+        'subnet10_cidr': subnet10_cidr,
+        'subnet11_cidr': subnet11_cidr,
+        'subnet12_cidr': subnet12_cidr,
+        'subnet13_cidr': subnet13_cidr,
+        'egresslb_ip': egresslb_ip
     }
 
     WebInFWConf_vars = {
