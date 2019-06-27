@@ -3,7 +3,7 @@
 # unique snippet name
 name: Azure Tansit VNET East-West
 # label used for menu selection
-label: Azure Transit VNET Framework. Step 4 - East West Traffic Segmentation
+label: Azure Transit VNET Framework Step 4 - East West Traffic Segmentation
 description: >
                This skillet demonstrates East-West traffic inspection and segmentation thru Hub NGFW’s by configuring Routes, Address objects, and Security policies on VM-Series.
 # type of device configuration
@@ -16,7 +16,7 @@ extends:
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
   collection: 
-    - azure_transit_vnet_v2
+    - Azure Transit VNET
 
 # ---------------------------------------------------------------------
 # end of preamble section

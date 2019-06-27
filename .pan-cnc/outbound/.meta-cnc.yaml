@@ -3,7 +3,7 @@
 # unique snippet name
 name: Azure Tansit VNET Outbound
 # label used for menu selection
-label: Azure Transit VNET Framework. Step 2 - Outbound Traffic Inspection
+label: Azure Transit VNET Framework Step 2 - Outbound Traffic Inspection
 description: >
                This skillet demonstrates Outbound traffic inspection thru Hub NGFW’s by configuring Routes, NAT and Security policies on VM-Series.
                It is very important to run this skillet after Step 1 as it also updates default and spoke routes on FW.
@@ -17,7 +17,7 @@ extends:
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
   collection: 
-    - azure_transit_vnet_v2
+    - Azure Transit VNET
 
 # ---------------------------------------------------------------------
 # end of preamble section
