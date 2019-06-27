@@ -34,9 +34,9 @@ variables:
 # determines where in the configuration hierarchy the xml fragment will be set. 'file' indicates the name of the file
 # to load and parse. Jinja2 style variables will be variable interpolated using the values of the 'variables' defined
 # in the 'variables' section.
-#snippets:
- - name: script
-   file: ../../destroy.py
+snippets:
+  - name: script
+    file: ../../destroy.py
 #    output_type:
 #    outputs:
 #      - name: app_threat_version
