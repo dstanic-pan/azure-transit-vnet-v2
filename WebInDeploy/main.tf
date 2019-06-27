@@ -691,18 +691,42 @@ output "f) EGRESS LB IP" {
   value  = "${var.egresslb_ip}"
 }
 
-output "g) WEB SUBNET CIDR" {
+output "g) HUB VNET CIDR" {
+  value  = "${var.vnet_cidr}"
+}
+
+output "h) UNTRUST SUBNET CIDR" {
+  value  = "${var.subnet1_cidr}"
+}
+
+output "i) TRUST SUBNET CIDR" {
+  value  = "${var.subnet2_cidr}"
+}
+
+output "j) SPOKE1 VNET CIDR" {
+  value  = "${var.spoke1_vnet_cidr}"
+}
+
+output "k) WEB SUBNET CIDR" {
   value  = "${var.subnet10_cidr}"
 }
 
-output "h) DEV SUBNET CIDR" {
+output "l) APP SUBNET CIDR" {
+  value  = "${var.subnet11_cidr}"
+}
+
+output "m) DB SUBNET CIDR" {
+  value  = "${var.subnet12_cidr}"
+}
+
+output "n) DEV SUBNET CIDR" {
   value  = "${var.subnet13_cidr}"
 }
 
-output "i) IP WEB1" {
+output "o) IP WEB1" {
   value  = "${azurerm_network_interface.spoke1-web-nic0.private_ip_address}"
 }
 
-output "j) IP DEV" {
+output "p) IP DEV" {
   value  = "${azurerm_network_interface.spoke1-dev01-nic0.private_ip_address}"
 }
