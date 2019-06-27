@@ -546,7 +546,7 @@ def apply_tf(working_dir, vars, description):
     return (return_code, outputs)
 
 
-def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet3_cidr, egresslb_ip):
+def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip):
 
     """
     Main function
@@ -752,4 +752,4 @@ if __name__ == '__main__':
     azure_region = args.azure_region
     vnet_cidr = args.vnet_cidr
 
-    main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet3_cidr, egresslb_ip)
+    main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip)
