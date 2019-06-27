@@ -27,35 +27,122 @@ labels:
 # type_hint defines the form field used by panhandler
 # type_hints can be text, ip_address, or dropdown
 variables:
-  - name: edl_name
-    description: EDL name
-    default: my_edl
+  - name: web_subnet_cidr
+    description: WebSubnet cidr
+    default: 10.1.0.0/24
     type_hint: text
-  - name: edl_description
-    description: EDL description
-    default: my_description
+  - name: app_subnet_cidr
+    description: AppSubnet cidr
+    default: 10.1.1.0/24
     type_hint: text
-  - name: edl_url
-    description: EDL url
-    default: my_default_url
+  - name: db_subnet_cidr
+    description: DBSubnet cidr
+    default: 10.1.2.0/24
     type_hint: text
-  - name: tag_name
-    description: Tag name
-    default: Tag
+  - name: dev_subnet_cidr
+    description: DevSubnet cidr
+    default: 10.1.3.0/24
     type_hint: text
-  - name: tag_description
-    description: Tag description
-    default: Tag
+  - name: ew_security_policy_name
+    description: East West Security policy name
+    default: allow-all-web-dev
     type_hint: text
-  - name: tag_color
-    description: Tag color
-    default: red
+  - name: src_subnet1_adr_obj
+    description: Source Subnet1 for example dev-subnet
+    default: dev-subnet
     type_hint: dropdown
     dd_list:
-      - key: blue
-        value: color3
-      - key: orange
-        value: color6
+        - key: any-subnet
+          value: any
+        - key: web-subnet
+          value: web-subnet
+        - key: app-subnet
+          value: app-subnet
+        - key: db-subnet
+          value: db-subnet
+        - key: dev-subnet
+          value: dev-subnet
+  - name: src_subnet2_adr_obj
+    description: Source Subnet2 for example dev-subnet
+    default: dev-subnet
+    type_hint: dropdown
+    dd_list:
+        - key: any-subnet
+          value: any
+        - key: web-subnet
+          value: web-subnet
+        - key: app-subnet
+          value: app-subnet
+        - key: db-subnet
+          value: db-subnet
+        - key: dev-subnet
+          value: dev-subnet
+  - name: dst_subnet1_adr_obj
+    description: Destination Subnet1 for example web-subnet
+    default: dev-subnet
+    type_hint: dropdown
+    dd_list:
+        - key: any-subnet
+          value: any
+        - key: web-subnet
+          value: web-subnet
+        - key: app-subnet
+          value: app-subnet
+        - key: db-subnet
+          value: db-subnet
+        - key: dev-subnet
+          value: dev-subnet
+  - name: dst_subnet2_adr_obj
+    description: Destination Subnet2 for example dev-subnet
+    default: web-subnet
+    type_hint: dropdown
+    dd_list:
+        - key: any-subnet
+          value: any
+        - key: web-subnet
+          value: web-subnet
+        - key: app-subnet
+          value: app-subnet
+        - key: db-subnet
+          value: db-subnet
+        - key: dev-subnet
+          value: dev-subnet
+  - name: app_type1
+    description: Application type1 for example any, web-browsing, ssh
+    default: web-browsing
+    type_hint: dropdown
+    dd_list:
+        - key: any-application
+          value: any
+        - key: web
+          value: web-browsing
+        - key: ssh
+          value: ssh
+        - key: ping
+          value: ping
+  - name: app_type2
+    description: Application type2 for example any, web-browsing, ssh
+    default: ssh
+    type_hint: dropdown
+    dd_list:
+          - key: any-application
+            value: any
+          - key: web
+            value: web-browsing
+          - key: ssh
+            value: ssh
+          - key: ping
+            value: ping
+  - name: action_type1
+    description: Action type allow or deny
+    default: allow
+    type_hint: dropdown
+    dd_list:
+          - key: allow
+            value: allow
+          - key: deny
+            value: deny
+
 # ---------------------------------------------------------------------
 # end of variables section
 
@@ -64,14 +151,11 @@ variables:
 # snippets used for api configuration including xpath and element as file name
 # files will load in the order listed
 snippets:
-  - name: edl
-    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list
-    file: edl.xml
-  - name: tag
-    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/tag
-    file: tag.xml
-  - name: security_rules
+  - name: address_objects
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address
+    file: address_objects.xml
+  - name: ew_security_rules
     xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
-    file: security_rules.xml
+    file: ew_security_rules.xml
 # ---------------------------------------------------------------------
 # end of snippets section
