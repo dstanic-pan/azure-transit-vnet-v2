@@ -759,6 +759,6 @@ if __name__ == '__main__':
     subnet11_cidr = args.subnet11_cidr
     subnet12_cidr = args.subnet12_cidr
     subnet13_cidr = args.subnet13_cidr
-    vnet_cidr = args.vnet_cidr
+    egresslb_ip = args.egresslb_ip
 
     main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip)
