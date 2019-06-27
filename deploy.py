@@ -560,7 +560,7 @@ def main(username, password, resource_group, azure_region, vnet_cidr):
     password = password
 
     WebInBootstrap_vars = {
-        'RG_Name': rg_name,
+        'RG_Name': resource_group,
         'Azure_Region': azure_region
     }
 
