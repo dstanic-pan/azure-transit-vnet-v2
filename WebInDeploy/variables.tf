@@ -44,7 +44,7 @@ variable "dns_servers" {
 }
 variable "resource_group" {
   description = "Enter new resource group name:"
-  default     = ""
+  default     = "dstanic-dev-test-dev03"
 }
 variable "fw_bundle" {
   description = "Enter the firewall license type (byol, bundle1, or bundle2):"
