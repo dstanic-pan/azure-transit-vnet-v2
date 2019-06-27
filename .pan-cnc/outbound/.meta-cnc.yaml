@@ -27,26 +27,35 @@ labels:
 # type_hint defines the form field used by panhandler
 # type_hints can be text, ip_address, or dropdown
 variables:
-  - name: security_policy_name
-    description: Security policy name
-    default: allow-all-out
+  - name: edl_name
+    description: EDL name
+    default: my_edl
     type_hint: text
-  - name: nat_policy_name
-    description: Nat policy name
-    default: outbound-nat
+  - name: edl_description
+    description: EDL description
+    default: my_description
     type_hint: text
-  - name: vr_untrust_nexthop
-    description: First IP from UnTrust Subnet CIDR (i.e. 10.0.1.1)
-    default: 10.0.1.1
-    type_hint: ip
-  - name: vr_trust_nexthop
-    description: First IP from Trust Subnet CIDR (i.e. 10.0.2.1)
-    default: 10.0.2.1
-    type_hint: ip
-  - name: spoke1_vnet_cidr
-    description: Spoke1 VNET Space (i.e. transit-vnet 10.1.0.0/16)
-    default: 10.1.0.0/16
-    type_hint: cidr
+  - name: edl_url
+    description: EDL url
+    default: my_default_url
+    type_hint: text
+  - name: tag_name
+    description: Tag name
+    default: Tag
+    type_hint: text
+  - name: tag_description
+    description: Tag description
+    default: Tag
+    type_hint: text
+  - name: tag_color
+    description: Tag color
+    default: red
+    type_hint: dropdown
+    dd_list:
+      - key: blue
+        value: color3
+      - key: orange
+        value: color6
 # ---------------------------------------------------------------------
 # end of variables section
 
@@ -55,17 +64,14 @@ variables:
 # snippets used for api configuration including xpath and element as file name
 # files will load in the order listed
 snippets:
-  - name: untrust_routes
-    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router/entry[@name='untrust-vr']/routing-table/ip/static-route
-    file: vr-untrust_routes.xml
-  - name: trust_routes
-    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router/entry[@name='trust-vr']/routing-table/ip/static-route
-    file: vr-trust_routes.xml
+  - name: edl
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list
+    file: edl.xml
+  - name: tag
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/tag
+    file: tag.xml
   - name: security_rules
     xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
     file: security_rules.xml
-  - name: nat_rules
-    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/nat/rules
-    file: nat_rules.xml
 # ---------------------------------------------------------------------
 # end of snippets section

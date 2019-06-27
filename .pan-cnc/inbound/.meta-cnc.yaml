@@ -26,23 +26,35 @@ labels:
 # type_hint defines the form field used by panhandler
 # type_hints can be text, ip_address, or dropdown
 variables:
-  - name: public_lb_ip
-    description: Public Load Balancer Public Frontend IP
-    default:
+  - name: edl_name
+    description: EDL name
+    default: my_edl
     type_hint: text
-  - name: web1_ip
-    description: Web server Web1 IP
-    default: 10.1.0.4
+  - name: edl_description
+    description: EDL description
+    default: my_description
     type_hint: text
-  - name: security_policy_name
-    description: Inbound security policy name
-    default: allow-web-in
+  - name: edl_url
+    description: EDL url
+    default: my_default_url
     type_hint: text
-  - name: nat_policy_name
-    description: Inbound NAT policy name
-    default: inbound-nat-to-web1
+  - name: tag_name
+    description: Tag name
+    default: Tag
     type_hint: text
-
+  - name: tag_description
+    description: Tag description
+    default: Tag
+    type_hint: text
+  - name: tag_color
+    description: Tag color
+    default: red
+    type_hint: dropdown
+    dd_list:
+      - key: blue
+        value: color3
+      - key: orange
+        value: color6
 # ---------------------------------------------------------------------
 # end of variables section
 
@@ -51,14 +63,14 @@ variables:
 # snippets used for api configuration including xpath and element as file name
 # files will load in the order listed
 snippets:
-  - name: address_objects
-    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address
-    file: address_objects.xml
-  - name: in_security_rules
+  - name: edl
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list
+    file: edl.xml
+  - name: tag
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/tag
+    file: tag.xml
+  - name: security_rules
     xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
-    file: in_security_rules.xml
-  - name: in_nat_rules
-    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/nat/rules
-    file: in_nat_rules.xml
+    file: security_rules.xml
 # ---------------------------------------------------------------------
 # end of snippets section
