@@ -567,7 +567,7 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
         'Admin_Username': username,
         'Admin_Password': password,
         'Azure_Region': azure_region,
-        'vnet_cidr': vnet_cidr
+        'vnet_cidr': vnet_cidr,
         'subnet0_cidr': subnet0_cidr,
         'subnet1_cidr': subnet1_cidr,
         'subnet2_cidr': subnet2_cidr,
