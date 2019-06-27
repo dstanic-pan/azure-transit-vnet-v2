@@ -546,7 +546,7 @@ def apply_tf(working_dir, vars, description):
     return (return_code, outputs)
 
 
-def main(username, password, rg_name, azure_region):
+def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet3_cidr, egresslb_ip):
 
     """
     Main function
@@ -567,7 +567,18 @@ def main(username, password, rg_name, azure_region):
     WebInDeploy_vars = {
         'Admin_Username': username,
         'Admin_Password': password,
-        'Azure_Region': azure_region
+        'Azure_Region': azure_region,
+        'vnet_cidr': vnet_cidr,
+        'subnet0_cidr': subnet0_cidr,
+        'subnet1_cidr': subnet1_cidr,
+        'subnet2_cidr': subnet2_cidr,
+        'subnet3_cidr': subnet3_cidr,
+        'spoke1_vnet_cidr': spoke1_vnet_cidr,
+        'subnet10_cidr': subnet10_cidr,
+        'subnet11_cidr': subnet11_cidr,
+        'subnet12_cidr': subnet12_cidr,
+        'subnet13_cidr': subnet13_cidr,
+        'egresslb_ip': egresslb_ip
     }
 
     WebInFWConf_vars = {
@@ -602,6 +613,7 @@ def main(username, password, rg_name, azure_region):
     WebInDeploy_vars.update({'RG_Name': resource_group})
     WebInDeploy_vars.update({'Attack_RG_Name': resource_group})
     WebInDeploy_vars.update({'Storage_Account_Fileshare': share_name})
+    
 
     #
     # Build Infrastructure
@@ -720,11 +732,24 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--password', help='Firewall Password', required=True)
     parser.add_argument('-r', '--resource_group', help='Resource Group', required=True)
     parser.add_argument('-j', '--azure_region', help='Azure Region', required=True)
+    parser.add_argument('-j', '--vnet_cidr', help='vnet_cidr', required=True)
+    parser.add_argument('-j', '--subnet0_cidr', help='subnet0_cidr', required=True)
+    parser.add_argument('-j', '--subnet1_cidr', help='subnet1_cidr', required=True)
+    parser.add_argument('-j', '--subnet2_cidr', help='subnet2_cidr', required=True)
+    parser.add_argument('-j', '--subnet3_cidr', help='subnet3_cidr', required=True)
+    parser.add_argument('-j', '--spoke1_vnet_cidr', help='spoke1_vnet_cidr', required=True)
+    parser.add_argument('-j', '--subnet10_cidr', help='subnet10_cidr', required=True)
+    parser.add_argument('-j', '--subnet11_cidr', help='subnet11_cidr', required=True)
+    parser.add_argument('-j', '--subnet12_cidr', help='subnet12_cidr', required=True)
+    parser.add_argument('-j', '--subnet13_cidr', help='subnet13_cidr', required=True)
+    parser.add_argument('-j', '--egresslb_ip', help='egresslb_ip', required=True)
+
 
     args = parser.parse_args()
     username = args.username
     password = args.password
     resource_group = args.resource_group
     azure_region = args.azure_region
+    vnet_cidr = args.vnet_cidr
 
-    main(username, password, resource_group, azure_region)
+    main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet3_cidr, egresslb_ip)
