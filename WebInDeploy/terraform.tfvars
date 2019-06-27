@@ -36,7 +36,7 @@ subnet12_cidr          = "10.1.2.0/24"
 subnet13_cidr          = "10.1.3.0/24"
 
 # Security groups
-//Bootstrap_Storage_Account = "<Bootstrap Storage Account>"
+//Bootstrap_Bucket = "<Bootstrap Storage Account>"
 
 //Storage_Account_Access_Key = "<Storage Account Access Key>"
 

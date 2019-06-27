@@ -433,7 +433,7 @@ resource "azurerm_virtual_machine" "vmfw1" {
     computer_name  = "${var.fw1_name}"
     admin_username = "${var.adminuser}"
     admin_password = "${var.adminuserpassword}"
-    custom_data    = "${join(",", list("storage-account=${var.bootstrap_bucket}", "access-key=${var.Storage_Account_Access_Key}", "file-share=${var.Storage_Account_File_Share}", "share-directory=${var.Storage_Account_File_Share_Directory}"))}"
+    custom_data    = "${join(",", list("storage-account=${var.Bootstrap_Bucket}", "access-key=${var.Storage_Account_Access_Key}", "file-share=${var.Storage_Account_File_Share}", "share-directory=${var.Storage_Account_File_Share_Directory}"))}"
   }
 
   primary_network_interface_id = "${azurerm_network_interface.fw1nic0.id}"
@@ -548,7 +548,7 @@ resource "azurerm_virtual_machine" "vmfw2" {
     computer_name  = "${var.fw2_name}"
     admin_username = "${var.adminuser}"
     admin_password = "${var.adminuserpassword}"
-    custom_data    = "${join(",", list("storage-account=${var.bootstrap_bucket}", "access-key=${var.Storage_Account_Access_Key}", "file-share=${var.Storage_Account_File_Share}", "share-directory=${var.Storage_Account_File_Share_Directory}"))}"
+    custom_data    = "${join(",", list("storage-account=${var.Bootstrap_Bucket}", "access-key=${var.Storage_Account_Access_Key}", "file-share=${var.Storage_Account_File_Share}", "share-directory=${var.Storage_Account_File_Share_Directory}"))}"
   }
 
   primary_network_interface_id = "${azurerm_network_interface.fw2nic0.id}"
