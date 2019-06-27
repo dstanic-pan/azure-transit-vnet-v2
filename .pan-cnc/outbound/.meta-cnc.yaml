@@ -16,7 +16,8 @@ extends:
 
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
-  collection: - azure_transit_vnet
+  collection: 
+    - azure_transit_vnet
 
 # ---------------------------------------------------------------------
 # end of preamble section
