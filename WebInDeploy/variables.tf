@@ -26,12 +26,12 @@ variable "vnet_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "spoke1-vnet_name" {
+variable "spoke1_vnet_name" {
   description = "Enter a name for the Spoke1 VNET (i.e. transit-vnet):"
   default     = "Spoke1-VNET"
 }
 
-variable "spoke1-vnet_cidr" {
+variable "spoke1_vnet_cidr" {
   type        = "string"
   description = "Enter VNET Space:"
   default     = "10.1.0.0/16"

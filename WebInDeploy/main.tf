@@ -110,8 +110,8 @@ resource "azurerm_route_table" "rt-devsubnet" {
 }
 # Create a spoke1 virtual network within the resource group
 resource "azurerm_virtual_network" "VNET2" {
-  name                = "${var.spoke1-vnet_name}"
-  address_space       = "${split(",", var.spoke1-vnet_cidr)}"
+  name                = "${var.spoke1_vnet_name}"
+  address_space       = "${split(",", var.spoke1_vnet_cidr)}"
   dns_servers         = "${var.dns_servers}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
