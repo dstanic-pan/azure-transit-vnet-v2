@@ -1,4 +1,4 @@
-variable "Bootstrap_Storage_Account" {
+variable "bootstrap_bucket" {
   //description = "Enter your Azure Storage Account:"
   //default     = ""
 }
