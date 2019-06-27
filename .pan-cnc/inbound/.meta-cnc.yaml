@@ -1,11 +1,11 @@
 # skillet preamble information used by panhandler
 # ---------------------------------------------------------------------
 # unique snippet name
-name: Azure-Tansit-VNET-Inbound
+name: Azure Tansit VNET Inbound
 # label used for menu selection
 label: Azure Transit VNET Framework. Step 3 - Inbound Traffic Inspection
 description: >
-               This skillet demonstrates Inbound traffic inspection thru Hub NGFW’s by configuring Azure UDR’s and corresponding routes, NAT and security policies on VM-Series
+               This skillet demonstrates Inbound traffic inspection thru Hub NGFW’s by configuring Routes, NAT and security policies on VM-Series.
 # type of device configuration
 # common types are panorama, panos, and template
 # https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
@@ -15,8 +15,7 @@ extends:
 
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
-  collection:
-    - Azure-Tansit-VNET
+  collection: - azure_transit_vnet
 
 # ---------------------------------------------------------------------
 # end of preamble section

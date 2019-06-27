@@ -1,11 +1,12 @@
 # skillet preamble information used by panhandler
 # ---------------------------------------------------------------------
 # unique snippet name
-name: Azure-Tansit-VNET-Outbound
+name: Azure Tansit VNET Outbound
 # label used for menu selection
-label: Azure Transit VNET Framework. Step 2 - Outbound use case
+label: Azure Transit VNET Framework. Step 2 - Outbound Traffic Inspection
 description: >
-               This skillet demonstrates Outbound traffic inspection thru Hub NGFW’s by configuring Azure UDR’s and corresponding routes, NAT and security policies on VM-Series
+               This skillet demonstrates Outbound traffic inspection thru Hub NGFW’s by configuring Routes, NAT and Security policies on VM-Series.
+               It is very important to run this skillet after Step 1 as it also updates default and spoke routes on FW.
 # type of device configuration
 # common types are panorama, panos, and template
 # https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
@@ -15,8 +16,7 @@ extends:
 
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
-  collection:
-    - Azure-Tansit-VNET
+  collection: - azure_transit_vnet
 
 # ---------------------------------------------------------------------
 # end of preamble section
