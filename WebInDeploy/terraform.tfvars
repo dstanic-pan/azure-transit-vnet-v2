@@ -40,9 +40,9 @@ Bootstrap_Bucket = ""
 
 Storage_Account_Access_Key = ""
 
-Storage_Account_Fileshare = ""
+Storage_Account_File_Share = ""
 
-Storage_Account_Fileshare_Directory = "None" 
+Storage_Account_File_Share_Directory = "None" 
 
 # Security groups
 sg_name               = "allow-all-security-group"
