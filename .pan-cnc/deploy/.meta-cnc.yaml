@@ -1,11 +1,11 @@
 name: azure_transit_vnet_v2
 # label used for menu selection
-label: Azure Transit VNET V2
+label: Azure Transit VNET Framework Step 1 - Infrastructure deployment
 
 description: >
-  This skillet deploys the Security Framework Azure Jenkins Exploit Protection environment.  The template deploy the Following:
-  Azure VNETS's, Route Tables, Subnets, Availability Zones, Load Balancers and Native Security tools WAF and Network Security Groups.
-  The Template will also deploy Palo Alto Networks Firewall with security posture.
+  This skillet deploys the Security Framework Azure Jenkins Exploit Protection environment.  The template deploy the Following
+  Azure VNETS's, Route Tables, Subnets, Availability Zones, Load Balancers, Network Security Groups.
+  The Template will also deploy Palo Alto Networks Firewall's in LB-Sandwich architecture.
 # type of skillet (panos or panorama or template or terraform)
 type: python3
 
