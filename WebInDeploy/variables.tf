@@ -12,7 +12,7 @@ variable "Storage_Account_File_Share" {
 }
 variable "Storage_Account_File_Share_Directory" {
   //description = "Enter your Storage Account File Share Directory (if bootstrapping multiple firewalls):"
-  //default = "None"
+  default = "None"
 }
 
 variable "vnet_name" {
