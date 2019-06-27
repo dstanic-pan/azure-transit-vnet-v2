@@ -1,6 +1,6 @@
 name: azure_transit_vnet_env_teardown
 # label used for menu selection
-label: Azure Transit VNET Framework Step 6 - Teardown
+label: Azure Transit VNET Framework Step 5 - Teardown
 
 description: >
   This skillet will destroy the Azure Transit VNET Environment.  Run this step once the demo is complete.
