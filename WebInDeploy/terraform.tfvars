@@ -36,13 +36,13 @@ subnet12_cidr          = "10.1.2.0/24"
 subnet13_cidr          = "10.1.3.0/24"
 
 # Security groups
-Bootstrap_Storage_Account = "<Bootstrap Storage Account>"
+//Bootstrap_Storage_Account = "<Bootstrap Storage Account>"
 
-Storage_Account_Access_Key = "<Storage Account Access Key>"
+//Storage_Account_Access_Key = "<Storage Account Access Key>"
 
-Storage_Account_Fileshare = "<Storage Account Fileshare Name>"
+//Storage_Account_Fileshare = "<Storage Account Fileshare Name>"
 
-Storage_Account_Fileshare_Directory = "None" 
+//Storage_Account_Fileshare_Directory = "None" 
 
 # Security groups
 sg_name               = "allow-all-security-group"

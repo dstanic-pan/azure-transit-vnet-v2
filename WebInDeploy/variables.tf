@@ -1,18 +1,18 @@
 variable "Bootstrap_Storage_Account" {
-  description = "Enter your Azure Storage Account:"
-  default     = ""
+  //description = "Enter your Azure Storage Account:"
+  //default     = ""
 }
 variable "Storage_Account_Access_Key" {
-  description = "Paste your Azure Storage Account Access Key:"
-  default     = ""
+  //description = "Paste your Azure Storage Account Access Key:"
+  //default     = ""
 }
 variable "Storage_Account_File_Share" {
-  description = "Enter your Storage Acccount File Share name:"
-  default     = ""
+  //description = "Enter your Storage Acccount File Share name:"
+  //default     = ""
 }
 variable "Storage_Account_File_Share_Directory" {
-  description = "Enter your Storage Account File Share Directory (if bootstrapping multiple firewalls):"
-  default = "None"
+  //description = "Enter your Storage Account File Share Directory (if bootstrapping multiple firewalls):"
+  //default = "None"
 }
 
 variable "vnet_name" {
