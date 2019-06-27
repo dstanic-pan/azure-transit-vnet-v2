@@ -754,7 +754,6 @@ if __name__ == '__main__':
     subnet1_cidr = args.subnet1_cidr
     subnet2_cidr = args.subnet2_cidr
     subnet3_cidr = args.subnet3_cidr
-    subnet4_cidr = args.subnet4_cidr
     spoke1_vnet_cidr = args.spoke1_vnet_cidr
     subnet10_cidr = args.subnet10_cidr
     subnet11_cidr = args.subnet11_cidr
