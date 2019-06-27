@@ -6,11 +6,11 @@ variable "Storage_Account_Access_Key" {
   //description = "Paste your Azure Storage Account Access Key:"
   //default     = ""
 }
-variable "Storage_Account_File_Share" {
+variable "Storage_Account_Fileshare" {
   //description = "Enter your Storage Acccount File Share name:"
   //default     = ""
 }
-variable "Storage_Account_File_Share_Directory" {
+variable "Storage_Account_Fileshare_Directory" {
   //description = "Enter your Storage Account File Share Directory (if bootstrapping multiple firewalls):"
   default = "None"
 }
