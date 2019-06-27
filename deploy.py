@@ -116,181 +116,7 @@ def walkdict(dict, match):
 
 
 
-def update_fw(fwMgtIP, api_key):
-    """
-    Applies latest AppID, Threat and AV updates to firewall after launch
-    :param fwMgtIP: Firewall management IP
-    :param api_key: API key
-
-    """
-    # # Download latest applications and threats
-
-    type = "op"
-    cmd = "<request><content><upgrade><download><latest></latest></download></upgrade></content></request>"
-    call = "https://%s/api/?type=%s&cmd=%s&key=%s" % (fwMgtIP, type, cmd, api_key)
-    getjobid = 0
-    jobid = ''
-    key = 'job'
-
-    # FIXME - Remove Duplicate code for parsing jobid
-
-    while getjobid == 0:
-        try:
-            r = send_request(call)
-            logger.info('Got response {} to request for content upgrade '.format(r.text))
-        except:
-            DeployRequestException
-            logger.info("Didn't get http 200 response.  Try again")
-        else:
-            try:
-                dict = xmltodict.parse(r.text)
-                if isinstance(dict, OrderedDict):
-                    jobid = walkdict(dict, key)
-            except Exception as err:
-                logger.info("Got exception {} trying to parse jobid from Dict".format(err))
-            if not jobid:
-                logger.info('Got http 200 response but didnt get jobid')
-                time.sleep(30)
-            else:
-                getjobid = 1
-
-    # FIXME - Remove Duplicate code for showing job status
-
-    completed = 0
-    while (completed == 0):
-        time.sleep(45)
-        call = "https://%s/api/?type=op&cmd=<show><jobs><id>%s</id></jobs></show>&key=%s" % (fwMgtIP, jobid, api_key)
-        try:
-            r = send_request(call)
-            logger.info('Got Response {} to show jobs '.format(r.text))
-        except:
-            DeployRequestException
-            logger.debug("failed to get jobid this time.  Try again")
-        else:
-            tree = ET.fromstring(r.text)
-            if tree.attrib['status'] == 'success':
-                try:
-                    if (tree[0][0][5].text == 'FIN'):
-                        logger.debug("APP+TP download Complete ")
-                        completed = 1
-                    print("Download latest Applications and Threats update")
-                    status = "APP+TP download Status - " + str(tree[0][0][5].text) + " " + str(
-                        tree[0][0][12].text) + "% complete"
-                    print('{0}\r'.format(status))
-                except:
-                    logger.info('Checking job is complete')
-                    completed = 1
-            else:
-                logger.info('Unable to determine job status')
-                completed = 1
-
-    # Install latest content update
-    type = "op"
-    cmd = "<request><content><upgrade><install><version>latest</version><commit>no</commit></install></upgrade></content></request>"
-    call = "https://%s/api/?type=%s&cmd=%s&key=%s" % (fwMgtIP, type, cmd, api_key)
-    getjobid = 0
-    jobid = ''
-    key = 'job'
-
-    while getjobid == 0:
-        try:
-            r = send_request(call)
-            logger.info('Got response {} to request for content upgrade '.format(r.text))
-        except:
-            DeployRequestException
-            logger.info("Didn't get http 200 response.  Try again")
-        else:
-            try:
-                dict = xmltodict.parse(r.text)
-                if isinstance(dict, OrderedDict):
-                    jobid = walkdict(dict, key)
-            except Exception as err:
-                logger.info("Got exception {} trying to parse jobid from Dict".format(err))
-            if not jobid:
-                logger.info('Got http 200 response but didnt get jobid')
-                time.sleep(30)
-            else:
-                getjobid = 1
-
-    completed = 0
-    while (completed == 0):
-        time.sleep(45)
-        call = "https://%s/api/?type=op&cmd=<show><jobs><id>%s</id></jobs></show>&key=%s" % (fwMgtIP, jobid, api_key)
-        try:
-            r = send_request(call)
-            logger.info('Got Response {} to show jobs '.format(r.text))
-        except:
-            DeployRequestException
-            logger.debug("failed to get jobid this time.  Try again")
-        else:
-            tree = ET.fromstring(r.text)
-            if tree.attrib['status'] == 'success':
-                try:
-                    if (tree[0][0][5].text == 'FIN'):
-                        logger.debug("APP+TP Install Complete ")
-                        completed = 1
-                    print("Install latest Applications and Threats update")
-                    status = "APP+TP Install Status - " + str(tree[0][0][5].text) + " " + str(
-                        tree[0][0][12].text) + "% complete"
-                    print('{0}\r'.format(status))
-                except:
-                    logger.info('Checking job is complete')
-                    completed = 1
-            else:
-                logger.info('Unable to determine job status')
-                completed = 1
-
-
-    # Download latest anti-virus update without committing
-    getjobid = 0
-    jobid = ''
-    type = "op"
-    cmd = "<request><anti-virus><upgrade><download><latest></latest></download></upgrade></anti-virus></request>"
-    key = 'job'
-    while getjobid == 0:
-        try:
-            call = "https://%s/api/?type=%s&cmd=%s&key=%s" % (fwMgtIP, type, cmd, api_key)
-            r = send_request(call)
-            logger.info('Got response to request AV install {}'.format(r.text))
-        except:
-            DeployRequestException
-            logger.info("Didn't get http 200 response.  Try again")
-        else:
-            try:
-                dict = xmltodict.parse(r.text)
-                if isinstance(dict, OrderedDict):
-                    jobid = walkdict(dict, key)
-            except Exception as err:
-                logger.info("Got exception {} trying to parse jobid from Dict".format(err))
-            if not jobid:
-                logger.info('Got http 200 response but didnt get jobid')
-                time.sleep(30)
-            else:
-                getjobid = 1
-
-    completed = 0
-    while (completed == 0):
-        time.sleep(45)
-        call = "https://%s/api/?type=op&cmd=<show><jobs><id>%s</id></jobs></show>&key=%s" % (
-            fwMgtIP, jobid, api_key)
-        r = send_request(call)
-        tree = ET.fromstring(r.text)
-        logger.debug('Got response for show job {}'.format(r.text))
-        if tree.attrib['status'] == 'success':
-            try:
-                if (tree[0][0][5].text == 'FIN'):
-                    logger.info("AV install Status Complete ")
-                    completed = 1
-                else:
-                    status = "Status - " + str(tree[0][0][5].text) + " " + str(tree[0][0][12].text) + "% complete"
-                    print('{0}\r'.format(status))
-            except:
-                logger.info('Could not parse output from show jobs, with jobid {}'.format(jobid))
-                completed = 1
-        else:
-            logger.info('Unable to determine job status')
-            completed = 1
-
+#def update_fw(fwMgtIP, api_key):
 
 def getApiKey(hostname, username, password):
 
@@ -323,61 +149,7 @@ def getApiKey(hostname, username, password):
             logger.debug("Response to get_api is {}".format(response))
             return api_key
 
-
-def getFirewallStatus(fwIP, api_key):
-    fwip = fwIP
-
-    """
-    Gets the firewall status by sending the API request show chassis status.
-    :param fwMgtIP:  IP Address of firewall interface to be probed
-    :param api_key:  Panos API key
-    """
-
-    url = "https://%s/api/?type=op&cmd=<show><chassis-ready></chassis-ready></show>&key=%s" % (fwip, api_key)
-    # Send command to fw and see if it times out or we get a response
-    logger.info("Sending command 'show chassis status' to firewall")
-    try:
-        response = requests.get(url, verify=False, timeout=10)
-        response.raise_for_status()
-    except requests.exceptions.Timeout as fwdownerr:
-        logger.debug("No response from FW. So maybe not up!")
-        return 'no'
-        # sleep and check again?
-    except requests.exceptions.HTTPError as fwstartgerr:
-        '''
-        Firewall may return 5xx error when rebooting.  Need to handle a 5xx response
-        raise_for_status() throws HTTPError for error responses
-        '''
-        logger.infor("Http Error: {}: ".format(fwstartgerr))
-        return 'cmd_error'
-    except requests.exceptions.RequestException as err:
-        logger.debug("Got RequestException response from FW. So maybe not up!")
-        return 'cmd_error'
-    else:
-        logger.debug("Got response to 'show chassis status' {}".format(response))
-
-        resp_header = ET.fromstring(response.content)
-        logger.debug('Response header is {}'.format(resp_header))
-
-        if resp_header.tag != 'response':
-            logger.debug("Did not get a valid 'response' string...maybe a timeout")
-            return 'cmd_error'
-
-        if resp_header.attrib['status'] == 'error':
-            logger.debug("Got an error for the command")
-            return 'cmd_error'
-
-        if resp_header.attrib['status'] == 'success':
-            # The fw responded with a successful command execution. So is it ready?
-            for element in resp_header:
-                if element.text.rstrip() == 'yes':
-                    logger.info("FW Chassis is ready to accept configuration and connections")
-                    return 'yes'
-                else:
-                    logger.info("FW Chassis not ready, still waiting for dataplane")
-                    time.sleep(10)
-                    return 'almost'
-
+#def getFirewallStatus(fwIP, api_key):
 
 def update_status(key, value):
     """
@@ -470,33 +242,7 @@ def create_azure_fileshare(share_prefix, account_name, account_key):
     return share_name
 
 
-def getServerStatus(IP):
-    """
-    Gets the server status by sending an HTTP request and checking for a 200 response code
-
-    """
-    global gcontext
-
-    call = ("http://" + IP + "/")
-    logger.info('URL request is {}'.format(call))
-    # Send command to fw and see if it times out or we get a response
-    count = 0
-    max_count = 12
-    while True:
-        if count < max_count:
-            time.sleep(10)
-            try:
-                count = count + 1
-                r = send_request(call)
-            except DeployRequestException as e:
-                logger.debug("Got Invalid response".format(e))
-            else:
-                logger.info('Jenkins Server responded with HTTP 200 code')
-                return 'server_up'
-        else:
-            break
-    return 'server_down'
-
+#def getServerStatus(IP):
 
 def apply_tf(working_dir, vars, description):
 
@@ -564,9 +310,10 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
     }
 
     WebInDeploy_vars = {
-        'Admin_Username': username,
-        'Admin_Password': password,
-        'Azure_Region': azure_region,
+        'username': username,
+        'password': password,
+        'azure_region': azure_region,
+        'resource_group': resource_group,
         'vnet_cidr': vnet_cidr,
         'subnet0_cidr': subnet0_cidr,
         'subnet1_cidr': subnet1_cidr,
@@ -580,10 +327,10 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
         'egresslb_ip': egresslb_ip
     }
 
-    WebInFWConf_vars = {
-        'Admin_Username': username,
-        'Admin_Password': password
-    }
+    #WebInFWConf_vars = {
+    #   'Admin_Username': username,
+    #   'Admin_Password': password
+    #}
 
     # Set run_plan to TRUE is you wish to run terraform plan before apply
     run_plan = False
@@ -593,7 +340,7 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
     return_code, outputs = apply_tf('./WebInBootstrap',WebInBootstrap_vars, 'WebInBootstrap')
 
     if return_code == 0:
-        share_prefix = 'jenkins-demo'
+        share_prefix = 'azure-demo'
         resource_group = outputs['Resource_Group']['value']
         bootstrap_bucket = outputs['Bootstrap_Bucket']['value']
         storage_account_access_key = outputs['Storage_Account_Access_Key']['value']
@@ -610,8 +357,9 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
     WebInDeploy_vars.update({'Storage_Account_Access_Key': storage_account_access_key})
     WebInDeploy_vars.update({'Bootstrap_Storage_Account': bootstrap_bucket})
     WebInDeploy_vars.update({'RG_Name': resource_group})
-    WebInDeploy_vars.update({'Attack_RG_Name': resource_group})
+    #WebInDeploy_vars.update({'Attack_RG_Name': resource_group})
     WebInDeploy_vars.update({'Storage_Account_Fileshare': share_name})
+    WebInDeploy_vars.update({'Azure_Region': azure_region})
     
 
     #
@@ -628,98 +376,14 @@ def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_ci
     update_status('web_in_deploy_output', web_in_deploy_output)
     if return_code == 0:
         update_status('web_in_deploy_status', 'success')
-        albDns = web_in_deploy_output['ALB-DNS']['value']
-        fwMgt = web_in_deploy_output['MGT-IP-FW-1']['value']
-        nlbDns = web_in_deploy_output['NLB-DNS']['value']
-        fwMgtIP = web_in_deploy_output['MGT-IP-FW-1']['value']
-
+        
         logger.info("Got these values from output of WebInDeploy \n\n")
-        logger.info("AppGateway address is {}".format(albDns))
-        logger.info("Internal loadbalancer address is {}".format(nlbDns))
-        logger.info("Firewall Mgt address is {}".format(fwMgt))
 
     else:
         logger.info("WebInDeploy failed")
         update_status('web_in_deploy_status', 'error')
         print(json.dumps(status_output))
         exit(1)
-
-    #
-    # Check firewall is up and running
-    #
-    #
-
-    api_key = getApiKey(fwMgtIP, username, password)
-
-    while True:
-        err = getFirewallStatus(fwMgtIP, api_key)
-        if err == 'cmd_error':
-            logger.info("Command error from fw ")
-
-        elif err == 'no':
-            logger.info("FW is not up...yet")
-            # print("FW is not up...yet")
-            time.sleep(60)
-            continue
-
-        elif err == 'almost':
-            logger.info("MGT up waiting for dataplane")
-            time.sleep(20)
-            continue
-
-        elif err == 'yes':
-            logger.info("FW is up")
-            break
-
-    logger.debug('Giving the FW another 10 seconds to fully come up to avoid race conditions')
-    time.sleep(10)
-    fw = firewall.Firewall(hostname=fwMgtIP, api_username=username, api_password=password)
-
-
-    logger.info("Updating firewall with latest content pack")
-    update_fw(fwMgtIP, api_key)
-
-    #
-    # Configure Firewall
-    #
-    WebInFWConf_vars.update({'FW_Mgmt_IP': fwMgtIP})
-
-    logger.info("Applying addtional config to firewall")
-
-    return_code, web_in_fw_conf_out = apply_tf('./WebInFWConf', WebInFWConf_vars, 'WebInFWConf')
-
-    if return_code == 0:
-        update_status('web_in_fw_conf', 'success')
-        logger.info("WebInFWConf failed")
-
-    else:
-        logger.info("WebInFWConf failed")
-        update_status('web_in_deploy_status', 'error')
-        print(json.dumps(status_output))
-        exit(1)
-
-    logger.info("Commit changes to firewall")
-
-    fw.commit()
-    logger.info("waiting for commit")
-    time.sleep(60)
-    logger.info("waiting for commit")
-
-    #
-    # Check Jenkins
-    #
-
-    logger.info('Checking if Jenkins Server is ready')
-
-    res = getServerStatus(albDns)
-
-    if res == 'server_up':
-        logger.info('Jenkins Server is ready')
-        logger.info('\n\n   ### Deployment Complete ###')
-        logger.info('\n\n   Connect to Jenkins Server at http://{}'.format(albDns))
-    else:
-        logger.info('Jenkins Server is down')
-        logger.info('\n\n   ### Deployment Complete ###')
 
     # dump out status to stdout
     print(json.dumps(status_output))
@@ -742,7 +406,6 @@ if __name__ == '__main__':
     parser.add_argument('-s12', '--subnet12_cidr', help='subnet12_cidr', required=True)
     parser.add_argument('-s13', '--subnet13_cidr', help='subnet13_cidr', required=True)
     parser.add_argument('-lb', '--egresslb_ip', help='egresslb_ip', required=True)
-
 
     args = parser.parse_args()
     username = args.username

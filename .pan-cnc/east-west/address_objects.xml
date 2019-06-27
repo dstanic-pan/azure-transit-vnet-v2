@@ -1,0 +1,12 @@
+<entry name="web-subnet">
+        <ip-netmask>{{ web_subnet_cidr }}</ip-netmask>
+</entry>
+<entry name="app-subnet">
+        <ip-netmask>{{ app_subnet_cidr }}</ip-netmask>
+</entry>
+<entry name="db-subnet">
+        <ip-netmask>{{ db_subnet_cidr }}</ip-netmask>
+</entry>
+<entry name="dev-subnet">
+        <ip-netmask>{{ dev_subnet_cidr }}</ip-netmask>
+</entry>

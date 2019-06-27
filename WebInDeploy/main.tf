@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group}"
-  location = "${var.location}"
+  location = "${var.azure_region}"
 }
 
 ################################################################################
@@ -183,7 +183,7 @@ resource "azurerm_virtual_network_peering" "peer-vnet2" {
 
 resource "azurerm_network_security_group" "sg" {
   name                = "${var.sg_name}"
-  location            = "${var.location}"
+  location            = "${var.azure_region}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
@@ -215,7 +215,7 @@ resource "azurerm_network_security_group" "sg" {
 
 resource "azurerm_availability_set" "fwavset" {
   name                         = "${var.fwavset_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   platform_fault_domain_count  = 2
   platform_update_domain_count = 5
@@ -227,7 +227,7 @@ resource "azurerm_availability_set" "fwavset" {
 
 resource "azurerm_lb" "egresslb" {
   name                = "${var.egresslb_name}"
-  location            = "${var.location}"
+  location            = "${var.azure_region}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   sku                 = "standard"
 
@@ -271,7 +271,7 @@ resource "azurerm_lb_probe" "egresslbprobe" {
 
 resource "azurerm_public_ip" "publiclbpip" {
   name                         = "${var.publiclb_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -279,7 +279,7 @@ resource "azurerm_public_ip" "publiclbpip" {
 
 resource "azurerm_lb" "publiclb" {
   name                  = "${var.publiclb_name}"
-  location              = "${var.location}"
+  location              = "${var.azure_region}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   sku                   = "standard"
 
@@ -333,7 +333,7 @@ resource "azurerm_lb_rule" "publiclbrule2" {
 
 resource "azurerm_public_ip" "fw1nic0pip" {
   name                         = "${var.fw1nic0pip_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -341,7 +341,7 @@ resource "azurerm_public_ip" "fw1nic0pip" {
 
 resource "azurerm_public_ip" "fw1nic1pip" {
   name                         = "${var.fw1nic1pip_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -349,7 +349,7 @@ resource "azurerm_public_ip" "fw1nic1pip" {
 
 resource "azurerm_network_interface" "fw1nic0" {
   name                      = "${var.fw1nic0_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
 
@@ -364,7 +364,7 @@ resource "azurerm_network_interface" "fw1nic0" {
 
 resource "azurerm_network_interface" "fw1nic1" {
   name                      = "${var.fw1nic1_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
   enable_ip_forwarding      = true
@@ -384,7 +384,7 @@ resource "azurerm_network_interface" "fw1nic1" {
 
 resource "azurerm_network_interface" "fw1nic2" {
   name                      = "${var.fw1nic2_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
   enable_ip_forwarding      = true
@@ -400,7 +400,7 @@ resource "azurerm_network_interface" "fw1nic2" {
 
 resource "azurerm_virtual_machine" "vmfw1" {
   name                = "${var.fw1_name}"
-  location            = "${var.location}"
+  location            = "${var.azure_region}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   vm_size             = "${var.fw_size}"
   availability_set_id = "${azurerm_availability_set.fwavset.id}"
@@ -431,8 +431,8 @@ resource "azurerm_virtual_machine" "vmfw1" {
 
   os_profile {
     computer_name  = "${var.fw1_name}"
-    admin_username = "${var.adminuser}"
-    admin_password = "${var.adminuserpassword}"
+    admin_username = "${var.username}"
+    admin_password = "${var.password}"
     custom_data = "storage-account=${var.Bootstrap_Storage_Account},access-key=${var.Storage_Account_Access_Key},file-share=${var.Storage_Account_Fileshare},share-directory=${var.Storage_Account_Fileshare_Directory}"  
   }
 
@@ -451,7 +451,7 @@ resource "azurerm_virtual_machine" "vmfw1" {
 
 resource "azurerm_public_ip" "fw2nic0pip" {
   name                         = "${var.fw2nic0pip_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -459,7 +459,7 @@ resource "azurerm_public_ip" "fw2nic0pip" {
 
 resource "azurerm_public_ip" "fw2nic1pip" {
   name                         = "${var.fw2nic1pip_name}"
-  location                     = "${var.location}"
+  location                     = "${var.azure_region}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
   sku                          = "standard"
@@ -467,7 +467,7 @@ resource "azurerm_public_ip" "fw2nic1pip" {
 
 resource "azurerm_network_interface" "fw2nic0" {
   name                      = "${var.fw2nic0_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
 
@@ -482,7 +482,7 @@ resource "azurerm_network_interface" "fw2nic0" {
 
 resource "azurerm_network_interface" "fw2nic1" {
   name                      = "${var.fw2nic1_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
   enable_ip_forwarding      = true
@@ -499,7 +499,7 @@ resource "azurerm_network_interface" "fw2nic1" {
 
 resource "azurerm_network_interface" "fw2nic2" {
   name                      = "${var.fw2nic2_name}"
-  location                  = "${var.location}"
+  location                  = "${var.azure_region}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.sg.id}"
   enable_ip_forwarding      = true
@@ -515,7 +515,7 @@ resource "azurerm_network_interface" "fw2nic2" {
 
 resource "azurerm_virtual_machine" "vmfw2" {
   name                = "${var.fw2_name}"
-  location            = "${var.location}"
+  location            = "${var.azure_region}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   vm_size             = "${var.fw_size}"
   availability_set_id = "${azurerm_availability_set.fwavset.id}"
@@ -546,8 +546,8 @@ resource "azurerm_virtual_machine" "vmfw2" {
 
   os_profile {
     computer_name  = "${var.fw2_name}"
-    admin_username = "${var.adminuser}"
-    admin_password = "${var.adminuserpassword}"
+    admin_username = "${var.username}"
+    admin_password = "${var.password}"
     custom_data = "storage-account=${var.Bootstrap_Storage_Account},access-key=${var.Storage_Account_Access_Key},file-share=${var.Storage_Account_Fileshare},share-directory=${var.Storage_Account_Fileshare_Directory}"
   }
 
@@ -603,8 +603,8 @@ resource "azurerm_virtual_machine" "spoke1-web" {
 
   os_profile {
     computer_name  = "Web1"
-    admin_username = "${var.adminuser}"
-    admin_password = "${var.adminuserpassword}"
+    admin_username = "${var.username}"
+    admin_password = "${var.password}"
     # Pulls web1-config.yml.tpl file to pre-configure the Ubuntu server with Apache with a blue page.
     custom_data    = "${base64encode(data.template_file.web1_config.rendered)}"
   }
@@ -651,8 +651,8 @@ resource "azurerm_virtual_machine" "spoke1-dev01" {
 
   os_profile {
     computer_name  = "Dev1"
-    admin_username = "${var.adminuser}"
-    admin_password = "${var.adminuserpassword}"
+    admin_username = "${var.username}"
+    admin_password = "${var.password}"
     # Pulls web1-config.yml.tpl file to pre-configure the Ubuntu server with Apache with a blue page.
     #custom_data    = "${base64encode(data.template_file.web1_config.rendered)}"
   }
@@ -668,11 +668,11 @@ output "" {
 }
 
 output "a) USERNAME    " {
-  value = "${var.adminuser}"
+  value = "${var.username}"
 }
 
 output "b) PASSWORD    " {
-  value = "${var.adminuserpassword}"
+  value = "${var.password}"
 }
 
 output "c) PUBLIC IP FW1 MGMT " {

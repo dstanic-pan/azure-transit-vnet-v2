@@ -1,0 +1,33 @@
+<entry name="{{ ew_security_policy_name }}">
+        <to>
+          <member>trust-zone</member>
+        </to>
+        <from>
+          <member>trust-zone</member>
+        </from>
+        <source>
+          <member>{{ src_subnet1_adr_obj }}</member>
+          <member>{{ src_subnet2_adr_obj }}</member>
+        </source>
+        <destination>
+          <member>{{ dst_subnet1_adr_obj }}</member>
+          <member>{{ dst_subnet2_adr_obj }}</member>
+        </destination>
+        <source-user>
+          <member>any</member>
+        </source-user>
+        <category>
+          <member>any</member>
+        </category>
+        <application>
+          <member>{{ app_type1 }}</member>
+          <member>{{ app_type2 }}</member>
+        </application>
+        <service>
+          <member>application-default</member>
+        </service>
+        <hip-profiles>
+          <member>any</member>
+        </hip-profiles>
+        <action>{{ action_type1 }}</action>
+</entry>

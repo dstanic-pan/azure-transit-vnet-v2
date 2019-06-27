@@ -1,0 +1,6 @@
+<entry name="public-lb-pip">
+        <ip-netmask>{{ public_lb_ip }}</ip-netmask>
+</entry>
+<entry name="web1">
+        <ip-netmask>{{ web1_ip }}</ip-netmask>
+</entry>

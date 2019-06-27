@@ -1,0 +1,19 @@
+<entry name="{{ nat_policy_name }}">
+        <destination-translation>
+          <translated-address>web1</translated-address>
+          <translated-port>80</translated-port>
+        </destination-translation>
+        <to>
+          <member>untrust-zone</member>
+        </to>
+        <from>
+          <member>untrust-zone</member>
+        </from>
+        <source>
+          <member>any</member>
+        </source>
+        <destination>
+          <member>public-lb-pip</member>
+        </destination>
+        <service>any</service>
+      </entry>

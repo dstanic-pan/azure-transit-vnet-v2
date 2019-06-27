@@ -43,17 +43,17 @@ variable "dns_servers" {
   default     = ["8.8.8.8", "8.8.4.4"]
 }
 variable "resource_group" {
-  description = "Enter new resource group name:"
-  default     = "dstanic-dev-test-dev05"
+  //description = "Enter new resource group name:"
+  default     = "transit-vnet-framework-changeme"
 }
 variable "fw_bundle" {
   description = "Enter the firewall license type (byol, bundle1, or bundle2):"
   default     = "bundle2"
 }
-variable "adminuser" {}
-variable "adminuserpassword" {}
+variable "username" {}
+variable "password" {}
 
-variable "location" {}
+variable "azure_region" {}
 
 variable "fw1_name" {}
 variable "fw2_name" {}

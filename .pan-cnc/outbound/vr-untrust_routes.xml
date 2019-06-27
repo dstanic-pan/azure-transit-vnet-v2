@@ -1,0 +1,38 @@
+          <entry name="default">
+           <nexthop>
+             <ip-address>{{vr_untrust_nexthop}}</ip-address>
+            </nexthop>
+            <bfd>
+              <profile>None</profile>
+            </bfd>
+            <path-monitor>
+              <enable>no</enable>
+              <failure-condition>any</failure-condition>
+              <hold-time>2</hold-time>
+            </path-monitor>
+            <interface>ethernet1/1</interface>
+            <metric>10</metric>
+            <destination>0.0.0.0/0</destination>
+            <route-table>
+              <unicast/>
+            </route-table>
+          </entry>
+          <entry name="spoke1-vnet">
+            <path-monitor>
+              <enable>no</enable>
+              <failure-condition>any</failure-condition>
+              <hold-time>2</hold-time>
+            </path-monitor>
+            <nexthop>
+              <next-vr>trust-vr</next-vr>
+            </nexthop>
+            <bfd>
+              <profile>None</profile>
+            </bfd>
+            <metric>10</metric>
+            <destination>{{spoke1_vnet_cidr}}</destination>
+            <route-table>
+              <unicast/>
+            </route-table>
+          </entry>
+          

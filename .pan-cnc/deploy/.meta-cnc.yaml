@@ -23,11 +23,11 @@ labels:
 variables:
   - name: username
     description: FW Username
-    default: panadmin
+    default: paloalto
     type_hint: text
   - name: password
     description: FW Password
-    default: Pan
+    default: PanPassword123!
     type_hint: password
   - name: resource_group
     description: Azure Resource Group

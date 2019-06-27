@@ -1,0 +1,71 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: Azure-Tansit-VNET-Outbound
+# label used for menu selection
+label: Azure Transit VNET Framework. Step 2 - Outbound use case
+description: >
+               This skillet demonstrates Outbound traffic inspection thru Hub NGFW’s by configuring Azure UDR’s and corresponding routes, NAT and security policies on VM-Series
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: panos
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - Azure-Tansit-VNET
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: security_policy_name
+    description: Security policy name
+    default: allow-all-out
+    type_hint: text
+  - name: nat_policy_name
+    description: Nat policy name
+    default: outbound-nat
+    type_hint: text
+  - name: vr_untrust_nexthop
+    description: First IP from UnTrust Subnet CIDR (i.e. 10.0.1.1)
+    default: 10.0.1.1
+    type_hint: ip
+  - name: vr_trust_nexthop
+    description: First IP from Trust Subnet CIDR (i.e. 10.0.2.1)
+    default: 10.0.2.1
+    type_hint: ip
+  - name: spoke1_vnet_cidr
+    description: Spoke1 VNET Space (i.e. transit-vnet 10.1.0.0/16)
+    default: 10.1.0.0/16
+    type_hint: cidr
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: untrust_routes
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router/entry[@name='untrust-vr']/routing-table/ip/static-route
+    file: vr-untrust_routes.xml
+  - name: trust_routes
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router/entry[@name='trust-vr']/routing-table/ip/static-route
+    file: vr-trust_routes.xml
+  - name: security_rules
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
+    file: security_rules.xml
+  - name: nat_rules
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/nat/rules
+    file: nat_rules.xml
+# ---------------------------------------------------------------------
+# end of snippets section

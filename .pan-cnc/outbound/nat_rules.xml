@@ -1,0 +1,26 @@
+<entry name="{{ nat_policy_name }}">
+        <description/>
+        <nat-type>ipv4</nat-type>
+        <from>
+          <member>trust-zone</member>
+        </from>
+        <to>
+          <member>untrust-zone</member>
+        </to>
+        <to-interface>any</to-interface>
+        <service>any</service>
+        <source>
+          <member>any</member>
+        </source>
+        <destination>
+          <member>any</member>
+        </destination>
+        <source-translation>
+          <dynamic-ip-and-port>
+            <interface-address>
+              <interface>ethernet1/1</interface>
+            </interface-address>
+          </dynamic-ip-and-port>
+        </source-translation>
+        <disabled>no</disabled>
+      </entry>
