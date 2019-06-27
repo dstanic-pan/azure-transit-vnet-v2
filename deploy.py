@@ -546,8 +546,7 @@ def apply_tf(working_dir, vars, description):
     return (return_code, outputs)
 
 
-def main(username, password, resource_group, azure_region, vnet_cidr):
-    #main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip):
+def main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip):
     """
     Main function
     :param username:
@@ -569,16 +568,16 @@ def main(username, password, resource_group, azure_region, vnet_cidr):
         'Admin_Password': password,
         'Azure_Region': azure_region,
         'vnet_cidr': vnet_cidr
-        #'subnet0_cidr': subnet0_cidr,
-        #'subnet1_cidr': subnet1_cidr,
-        #'subnet2_cidr': subnet2_cidr,
-        #'subnet3_cidr': subnet3_cidr,
-        #'spoke1_vnet_cidr': spoke1_vnet_cidr,
-        #'subnet10_cidr': subnet10_cidr,
-        #'subnet11_cidr': subnet11_cidr,
-        #'subnet12_cidr': subnet12_cidr,
-        #'subnet13_cidr': subnet13_cidr,
-        #'egresslb_ip': egresslb_ip
+        'subnet0_cidr': subnet0_cidr,
+        'subnet1_cidr': subnet1_cidr,
+        'subnet2_cidr': subnet2_cidr,
+        'subnet3_cidr': subnet3_cidr,
+        'spoke1_vnet_cidr': spoke1_vnet_cidr,
+        'subnet10_cidr': subnet10_cidr,
+        'subnet11_cidr': subnet11_cidr,
+        'subnet12_cidr': subnet12_cidr,
+        'subnet13_cidr': subnet13_cidr,
+        'egresslb_ip': egresslb_ip
     }
 
     WebInFWConf_vars = {
@@ -733,16 +732,16 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--resource_group', help='Resource Group', required=True)
     parser.add_argument('-j', '--azure_region', help='Azure Region', required=True)
     parser.add_argument('-v1', '--vnet_cidr', help='vnet_cidr', required=True)
-    #parser.add_argument('-s0', '--subnet0_cidr', help='subnet0_cidr', required=True)
-    #parser.add_argument('-s1', '--subnet1_cidr', help='subnet1_cidr', required=True)
-    #parser.add_argument('-s2', '--subnet2_cidr', help='subnet2_cidr', required=True)
-    #parser.add_argument('-s3', '--subnet3_cidr', help='subnet3_cidr', required=True)
-    #parser.add_argument('-v2', '--spoke1_vnet_cidr', help='spoke1_vnet_cidr', required=True)
-    #parser.add_argument('-s10', '--subnet10_cidr', help='subnet10_cidr', required=True)
-    #parser.add_argument('-s11', '--subnet11_cidr', help='subnet11_cidr', required=True)
-    #parser.add_argument('-s12', '--subnet12_cidr', help='subnet12_cidr', required=True)
-    #parser.add_argument('-s13', '--subnet13_cidr', help='subnet13_cidr', required=True)
-    #parser.add_argument('-lb', '--egresslb_ip', help='egresslb_ip', required=True)
+    parser.add_argument('-s0', '--subnet0_cidr', help='subnet0_cidr', required=True)
+    parser.add_argument('-s1', '--subnet1_cidr', help='subnet1_cidr', required=True)
+    parser.add_argument('-s2', '--subnet2_cidr', help='subnet2_cidr', required=True)
+    parser.add_argument('-s3', '--subnet3_cidr', help='subnet3_cidr', required=True)
+    parser.add_argument('-v2', '--spoke1_vnet_cidr', help='spoke1_vnet_cidr', required=True)
+    parser.add_argument('-s10', '--subnet10_cidr', help='subnet10_cidr', required=True)
+    parser.add_argument('-s11', '--subnet11_cidr', help='subnet11_cidr', required=True)
+    parser.add_argument('-s12', '--subnet12_cidr', help='subnet12_cidr', required=True)
+    parser.add_argument('-s13', '--subnet13_cidr', help='subnet13_cidr', required=True)
+    parser.add_argument('-lb', '--egresslb_ip', help='egresslb_ip', required=True)
 
 
     args = parser.parse_args()
@@ -751,6 +750,16 @@ if __name__ == '__main__':
     resource_group = args.resource_group
     azure_region = args.azure_region
     vnet_cidr = args.vnet_cidr
+    subnet0_cidr = args.subnet0_cidr
+    subnet1_cidr = args.subnet1_cidr
+    subnet2_cidr = args.subnet2_cidr
+    subnet3_cidr = args.subnet3_cidr
+    subnet4_cidr = args.subnet4_cidr
+    spoke1_vnet_cidr = args.spoke1_vnet_cidr
+    subnet10_cidr = args.subnet10_cidr
+    subnet11_cidr = args.subnet11_cidr
+    subnet12_cidr = args.subnet12_cidr
+    subnet13_cidr = args.subnet13_cidr
+    vnet_cidr = args.vnet_cidr
 
-    main(username, password, resource_group, azure_region, vnet_cidr)    
-    #main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip)
+    main(username, password, resource_group, azure_region, vnet_cidr, subnet0_cidr, subnet1_cidr, subnet2_cidr, subnet3_cidr, spoke1_vnet_cidr, subnet10_cidr, subnet11_cidr, subnet12_cidr, subnet13_cidr, egresslb_ip)
