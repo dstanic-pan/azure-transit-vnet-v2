@@ -32,7 +32,7 @@ variables:
     type_hint: password
   - name: resource_group
     description: Azure Resource Group
-    default: cloud-security-framework-changeme
+    default: transit-vnet-framework-changeme
     type_hint: text
   - name: azure_region
     description: Azure Region
