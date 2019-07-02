@@ -87,7 +87,7 @@ def main (username, password):
     if os.path.isfile(fpath):
         tf = Terraform(working_dir='./WebInDeploy')
         rg_name = tf.output('RESOURCE_GROUP_NAME')
-        rg_name1 = tf.output('Resource_Group')
+        #rg_name1 = tf.output('Resource_Group')
         delete_rg_cmd = 'group delete --name ' + rg_name + ' --yes'
         az_cli(delete_rg_cmd)
     #
@@ -98,6 +98,8 @@ def main (username, password):
 
     fpath = './WebInBootstrap/' + tfstate_file
     if os.path.isfile(fpath):
+        tf = Terraform(working_dir='./WebInBootstrap')
+        rg_name1 = tf.output('Resource_Group')  
         delete_rg_cmd = 'group delete --name ' + rg_name1 + ' --yes'
         az_cli(delete_rg_cmd)
     #
