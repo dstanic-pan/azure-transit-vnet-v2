@@ -4,12 +4,12 @@
 Azure Transit VNET, Hub and Spoke LB Sandwich architecture built as one Skillet Collection with Six Skillets that cover Infrastructure, Inbound, Outbound and East-West use cases.
 
 # Skillet Details
-Authoring Group: Public Cloud
-Documentation:  https://github.com/dstanic-pan/azure-transit-vnet-v2
-PAN-OS Supported:  8.1, 9.0
-Cloud Provider(s) Supported:  Azure
-Type of Skillet:  terraform, python3l, panos.
-Purpose:  Demo
+Authoring Group: Public Cloud  
+Documentation:  https://github.com/dstanic-pan/azure-transit-vnet-v2  
+PAN-OS Supported:  8.1, 9.0  
+Cloud Provider(s) Supported:  Azure  
+Type of Skillet:  terraform, python3l, panos  
+Purpose:  Demo  
 
 # Detail Description
 Azure Transit VNET is a solution that consists of one skillet collection with six skillets. It provides a very flexible and efficient way to deploy and test most requested Azure architecture and ensures that all best practices are being met. Overall solution provides one simple framework to easily deploy VM-Series load Balancing Sandwich architecture with two test instances distributed across two subnets of Spoke VNET. 
