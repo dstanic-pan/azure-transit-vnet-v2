@@ -5,7 +5,7 @@ Azure Transit VNET, Hub and Spoke LB Sandwich architecture built as one Skillet 
 
 # Skillet Details
 Authoring Group: Public Cloud  
-Documentation:  https://github.com/dstanic-pan/azure-transit-vnet-v2  
+Documentation:  https://github.com/dstanic-pan/azure-transit-vnet-v2/documentation  
 PAN-OS Supported:  8.1, 9.0  
 Cloud Provider(s) Supported:  Azure  
 Type of Skillet:  terraform, python3l, panos  
