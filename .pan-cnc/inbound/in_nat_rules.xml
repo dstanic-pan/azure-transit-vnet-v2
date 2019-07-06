@@ -1,4 +1,4 @@
-<entry name="{{ nat_policy_name }}">
+      <entry name="{{ nat_policy_name }}">
         <destination-translation>
           <translated-address>web1</translated-address>
           <translated-port>80</translated-port>
@@ -16,4 +16,11 @@
           <member>public-lb-pip</member>
         </destination>
         <service>any</service>
+        <source-translation>
+          <dynamic-ip-and-port>
+            <interface-address>
+              <interface>ethernet1/2</interface>
+            </interface-address>
+          </dynamic-ip-and-port>
+        </source-translation>
       </entry>
