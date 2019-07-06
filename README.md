@@ -1,7 +1,7 @@
 # Azure Transit VNET Framework
 
 # Brief Description
-Azure Transit VNET, Hub and Spoke LB Sandwich architecture built as one Skillet Collection with Six Skillets that cover Infrastructure, Inbound, Outbound and East-West use cases.
+Palo Alto Networks Panhandler Azure Transit VNET Framework provides VM-Series Hub and Spoke LB Sandwich architecture for Microsoft Azure built as one Skillet Collection with Six Skillets that cover Infrastructure, Inbound, Outbound and East-West use cases.
 
 # Skillet Details
 Authoring Group: Public Cloud  
