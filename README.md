@@ -1,7 +1,7 @@
 # Azure Transit VNET Framework
 
 # Brief Description
-Azure Transit VNET, Hub and Spoke LB Sandwich architecture built as one collection with six skillets that cover Infrastructure, Inbound, Outbound and East-West use cases.
+Azure Transit VNET, Hub and Spoke LB Sandwich architecture built as one Skillet Collection with Six Skillets that cover Infrastructure, Inbound, Outbound and East-West use cases.
 
 # Skillet Details
 Authoring Group: Public Cloud
